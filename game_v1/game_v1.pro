@@ -29,14 +29,16 @@ SOURCES += \
         mainwindow.cpp \
     door.cpp \
     doorpage.cpp \
-    namepage.cpp
+    namepage.cpp \
+    game_one.cpp
 
 HEADERS += \
         mainwindow.h \
     door.h \
     door.h \
     doorpage.h \
-    namepage.h
+    namepage.h \
+    game_one.h
 
 FORMS += \
         mainwindow.ui
