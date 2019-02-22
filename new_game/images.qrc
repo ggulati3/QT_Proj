@@ -5,6 +5,7 @@
         <file>closedDoor.png</file>
         <file>background.png</file>
         <file>key.png</file>
-        <file>music.mp3</file>
+        <file>pixel.png</file>
     </qresource>
+    <qresource prefix="/sounds"/>
 </RCC>

@@ -7,26 +7,29 @@
 #include "key.h"
 #include <QMenuBar>
 #include <QPixmap>
-#include <QtMultimedia/QMediaPlayer>
-#include <QMediaPlaylist>
+#include <QTimer>
+#include <QMediaPlayer>
+/* constructor for the main window of the application
+ * @param parent
+ * @return N/A
+ * */
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
       ui->setupUi(this);
 
-      // added music
-
-      QMediaPlayer* music = new QMediaPlayer();
-      music->setMedia(QUrl::fromLocalFile("/Users/gauravgulati/desktop/newgame/music.mp3"));
-      music->play();
-
-
       stackWidget->addWidget(firstpage); // doors - index 0
       stackWidget->addWidget(secondpage); //game one - index 1
       stackWidget->addWidget(thirdpage); //game two - index 2
+      stackWidget->addWidget(fourthpage); //game three - index 3
+      stackWidget->addWidget(fifthpage); //final page - index 4
       stackWidget->setCurrentIndex(0);
       this->setCentralWidget(stackWidget);      //central widget is stacked, so multiple screens can be shown
 
       connect_buttons();
+
+      QMediaPlayer* music = new QMediaPlayer();
+      music->setMedia(QUrl("qrc:/music.mp3"));
+      music->play();
 
     /*
      * Create a menu bar on the tope of the screen, with a pushbutton "?".
@@ -39,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
       this->setMenuBar(mbar);                               //set menu bar for central widget
 
       //game instructions
+      QWidget* new_win = new QWidget;
       QLabel* instructions = new QLabel("Welcome to the Arcade! \n \n"
                 "To start off, you are given one key and access to the first door. \n"
                 "Clicking the “Enter” button underneath the door will take you inside to the first minigame. \n"
@@ -46,12 +50,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
                 "If you do, you will receive another key and return to the main menu. \n"
                 "This new key opens the second door and you will face a new challenge inside. \n"
                 "Collect all the keys and beat the challenges to win the game! \n");
-      QWidget* new_win = new QWidget;           //new window
       QHBoxLayout* l1 = new QHBoxLayout;
       l1->addWidget(instructions);              //add label
       new_win->setFixedSize(600, 200);
       new_win->setLayout(l1);
-
       QObject::connect(question, SIGNAL(clicked()), new_win, SLOT(show()));     //connect pushbutton and new window
 
       /*
@@ -85,6 +87,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
       this->setPalette(palette);
 
       this->setFixedSize(1200, 800);       //set fixed size for window
+
+     /* delete mbar;
+      delete new_win;
+      delete l1;
+      delete title;
+      delete new_key;
+      delete key_label;
+      */
 }
 
 /* Function to go to page 2/game 1
@@ -101,6 +111,15 @@ void MainWindow::go_to_page_2(){
  * */
 void MainWindow::go_to_page_3(){
     stackWidget->setCurrentIndex(2);
+}
+
+
+/* Function to go to page 4/game 3
+ * @param N/A
+ * @return N/A
+ * */
+void MainWindow::go_to_page_4(){
+    stackWidget->setCurrentIndex(3);
 }
 
 /* Function to return to main screen
@@ -123,6 +142,30 @@ void MainWindow::win_gameone(){
     stackWidget->setCurrentIndex(0);
 }
 
+/* function that goes to page 2 after a 400ms delay
+ * @param N/A
+ * @return N/A
+ * */
+void MainWindow::wait_forpage2(){
+    QTimer::singleShot(400, this, SLOT(go_to_page_2()));
+}
+
+/* function that goes to page 3 after a 400ms delay
+ * @param N/A
+ * @return N/A
+ * */
+void MainWindow::wait_forpage3(){
+    QTimer::singleShot(400, this, SLOT(go_to_page_3()));
+}
+
+/* function that goes to page 4 after a 400ms delay
+ * @param N/A
+ * @return N/A
+ * */
+void MainWindow::wait_forpage4(){
+    QTimer::singleShot(400, this, SLOT(go_to_page_4()));
+}
+
 /* Function to update status bar and change window back from game two to main screen
  * @param N/A
  * @return N/A
@@ -135,17 +178,28 @@ void MainWindow::win_gametwo(){
     stackWidget->setCurrentIndex(0);
 }
 
+/* Function to change window back from game three to final page
+ * @param N/A
+ * @return N/A
+ * */
+void MainWindow::win_gamethree(){
+    stackWidget->setCurrentIndex(4);
+}
+
 /* Function to connect all the buttons to transition between windows
  * @param N/A
  * @return N/A
  * */
 void MainWindow::connect_buttons(){
-    QObject::connect(firstpage->button,SIGNAL(clicked()), this, SLOT(go_to_page_2())); //clicking enter button goes from first page to second page
+    QObject::connect(firstpage->button,SIGNAL(clicked()), this, SLOT(wait_forpage2())); //clicking enter button goes from first page to second page
     QObject::connect(secondpage->back_button,SIGNAL(clicked()), this, SLOT(go_to_main())); //clicking back_button goes back to first page
     QObject::connect(secondpage->win_game_button,SIGNAL(clicked()), this, SLOT(win_gameone())); //simulating winning game one, returning to main page
-    QObject::connect(firstpage->button_2,SIGNAL(clicked()), this, SLOT(go_to_page_3())); //clicking second enter button goes from frist page to third page
+    QObject::connect(firstpage->button_2,SIGNAL(clicked()), this, SLOT(wait_forpage3())); //clicking second enter button goes from first page to third page
     QObject::connect(thirdpage->back_button,SIGNAL(clicked()), this, SLOT(go_to_main())); //clicking back_button goes back to first page
-    QObject::connect(thirdpage->win_game_button,SIGNAL(clicked()), this, SLOT(win_gametwo())); //simulating winning game one, returning to main page
+    QObject::connect(thirdpage->win_game_button,SIGNAL(clicked()), this, SLOT(win_gametwo())); //simulating winning game two, returning to main page
+    QObject::connect(firstpage->button_3,SIGNAL(clicked()), this, SLOT(wait_forpage4())); //clicking third enter button goes from first page to fourth page
+    QObject::connect(fourthpage->back_button,SIGNAL(clicked()), this, SLOT(go_to_main())); //clicking back_button goes back to first page
+    QObject::connect(fourthpage->win_game_button,SIGNAL(clicked()), this, SLOT(win_gamethree())); //simulating winning game two, returning to main page
 }
 
 /* destructor

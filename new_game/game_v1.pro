@@ -4,8 +4,9 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
-QT       += multimedia
+QT       += core gui \
+            multimedia
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = game_v1
@@ -31,7 +32,9 @@ SOURCES += \
     doorpage.cpp \
     gameone.cpp \
     gametwo.cpp \
-    key.cpp
+    key.cpp \
+    gamethree.cpp \
+    finalpage.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,7 +43,9 @@ HEADERS += \
     doorpage.h \
     gameone.h \
     gametwo.h \
-    key.h
+    key.h \
+    gamethree.h \
+    finalpage.h
 
 FORMS += \
         mainwindow.ui
@@ -51,7 +56,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    images.qrc
+    images.qrc \
+    sounds.qrc
 
 DISTFILES += \
     ../closedDoor.png

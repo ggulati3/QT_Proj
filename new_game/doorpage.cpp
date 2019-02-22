@@ -1,16 +1,14 @@
 #include "doorpage.h"
 
 /* default constructor that creates a page with 3 instances of 'door' and 1 QPushButton
+ * @param N/A
+ * @return N/A
  */
 doorPage::doorPage()
-{
-
-
-    layout->addWidget(d_1,0,0);
+{   layout->addWidget(d_1,0,0);
     layout->addWidget(d_2,0,1);
     layout->addWidget(d_3,0,2);
     layout->addWidget(button, 1, 0, 5, 1);
-    //layout->addWidget(button_2, 1, 1, 5, 1);
 
     QObject::connect(button, SIGNAL(clicked()), //clicking the enter button->opening the door
     d_1, SLOT(open_door()));
@@ -23,6 +21,10 @@ doorPage::doorPage()
     this->show();
 }
 
+/* destructor for doorPage
+ * @param N/A
+ * @return N/A
+ * */
 doorPage::~doorPage(){
     delete layout;
     delete button;

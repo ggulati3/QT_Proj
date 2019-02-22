@@ -7,7 +7,7 @@
 class doorPage : public QWidget
 {
 public:
-    doorPage(); //default constructor
+    doorPage(); //default creates a page of doors
     QGridLayout* layout = new QGridLayout;
     QPushButton* button = new QPushButton("Enter");
     QPushButton* button_2 = new QPushButton("Enter");
