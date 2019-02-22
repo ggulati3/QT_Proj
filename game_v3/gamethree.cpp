@@ -16,7 +16,4 @@ gamethree::gamethree()
  * @return N/A
  * */
 gamethree::~gamethree(){
-    delete back_button;
-    delete win_game_button;
-    delete layoutt;
 }

@@ -42,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
       this->setMenuBar(mbar);                               //set menu bar for central widget
 
       //game instructions
-      QWidget* new_win = new QWidget;
+
       QLabel* instructions = new QLabel("Welcome to the Arcade! \n \n"
                 "To start off, you are given one key and access to the first door. \n"
                 "Clicking the “Enter” button underneath the door will take you inside to the first minigame. \n"
@@ -87,14 +87,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
       this->setPalette(palette);
 
       this->setFixedSize(1200, 800);       //set fixed size for window
-
-     /* delete mbar;
-      delete new_win;
-      delete l1;
-      delete title;
-      delete new_key;
-      delete key_label;
-      */
 }
 
 /* Function to go to page 2/game 1
@@ -209,9 +201,5 @@ void MainWindow::connect_buttons(){
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete firstpage;
-    delete secondpage;
-    delete thirdpage;
-    delete stackWidget;
-    delete sbar;
+    delete new_win;
 }

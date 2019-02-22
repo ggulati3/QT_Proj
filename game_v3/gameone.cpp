@@ -19,7 +19,4 @@ gameone::gameone()
  * @return N/A
  * */
 gameone::~gameone(){
-    delete back_button;
-    delete win_game_button;
-    delete layoutt;
 }

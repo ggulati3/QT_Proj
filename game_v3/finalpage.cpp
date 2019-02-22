@@ -1,5 +1,6 @@
 #include "finalpage.h"
 #include "QPixmap"
+
 /* default constructor, placeholder trophy image
  * @param N/A
  * @return N/A

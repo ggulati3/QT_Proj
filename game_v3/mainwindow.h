@@ -29,8 +29,9 @@ public:
     finalpage* fifthpage = new finalpage;               //final page of the game
     QStackedWidget* stackWidget = new QStackedWidget;   //stacked widget for main screen and games
     int num_keys = 1;       //key counter for whole program
-    QStatusBar* sbar = new QStatusBar;
-    void connect_buttons();
+    QStatusBar* sbar = new QStatusBar;      //status bar
+    void connect_buttons();     //connects buttons to functions
+    QWidget* new_win = new QWidget; //window for instructions
 
 public slots:
     void wait_forpage2();

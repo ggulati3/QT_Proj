@@ -16,7 +16,4 @@ gametwo::gametwo()
  * @return N/A
  * */
 gametwo::~gametwo(){
-    delete back_button;
-    delete win_game_button;
-    delete layoutt;
 }
