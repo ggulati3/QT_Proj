@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/door"/>
+    <qresource prefix="/">
+        <file>openDoor.png</file>
+        <file>closedDoor.png</file>
+        <file>background.png</file>
+        <file>key.png</file>
+        <file>music.mp3</file>
+    </qresource>
+</RCC>
