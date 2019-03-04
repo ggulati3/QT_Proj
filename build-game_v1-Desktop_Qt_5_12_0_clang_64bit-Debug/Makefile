@@ -58,10 +58,12 @@ SOURCES       = ../game_v3/main.cpp \
 		../game_v3/gametwo.cpp \
 		../game_v3/key.cpp \
 		../game_v3/gamethree.cpp \
-		../game_v3/finalpage.cpp qrc_images.cpp \
+		../game_v3/finalpage.cpp \
+		../game_v3/spacerunner.cpp qrc_images.cpp \
 		qrc_sounds.cpp \
 		moc_mainwindow.cpp \
-		moc_door.cpp
+		moc_door.cpp \
+		moc_spacerunner.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		door.o \
@@ -71,10 +73,12 @@ OBJECTS       = main.o \
 		key.o \
 		gamethree.o \
 		finalpage.o \
+		spacerunner.o \
 		qrc_images.o \
 		qrc_sounds.o \
 		moc_mainwindow.o \
-		moc_door.o
+		moc_door.o \
+		moc_spacerunner.o
 DIST          = ../closedDoor.png \
 		../../../Qt/5.12.0/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.12.0/clang_64/mkspecs/qdevice.pri \
@@ -242,6 +246,7 @@ DIST          = ../closedDoor.png \
 		../../../Qt/5.12.0/clang_64/mkspecs/features/qt_config.prf \
 		../../../Qt/5.12.0/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Qt/5.12.0/clang_64/mkspecs/features/spec_post.prf \
+		../game_v3/.qmake.stash \
 		../../../Qt/5.12.0/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt/5.12.0/clang_64/mkspecs/features/mac/sdk.prf \
 		../../../Qt/5.12.0/clang_64/mkspecs/features/toolchain.prf \
@@ -277,7 +282,8 @@ DIST          = ../closedDoor.png \
 		../game_v3/gametwo.h \
 		../game_v3/key.h \
 		../game_v3/gamethree.h \
-		../game_v3/finalpage.h ../game_v3/main.cpp \
+		../game_v3/finalpage.h \
+		../game_v3/spacerunner.h ../game_v3/main.cpp \
 		../game_v3/mainwindow.cpp \
 		../game_v3/door.cpp \
 		../game_v3/doorpage.cpp \
@@ -285,7 +291,8 @@ DIST          = ../closedDoor.png \
 		../game_v3/gametwo.cpp \
 		../game_v3/key.cpp \
 		../game_v3/gamethree.cpp \
-		../game_v3/finalpage.cpp
+		../game_v3/finalpage.cpp \
+		../game_v3/spacerunner.cpp
 QMAKE_TARGET  = game_v1
 DESTDIR       = 
 TARGET        = game_v1.app/Contents/MacOS/game_v1
@@ -473,6 +480,7 @@ Makefile: ../game_v3/game_v1.pro ../../../Qt/5.12.0/clang_64/mkspecs/macx-clang/
 		../../../Qt/5.12.0/clang_64/mkspecs/features/qt_config.prf \
 		../../../Qt/5.12.0/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Qt/5.12.0/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../Qt/5.12.0/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt/5.12.0/clang_64/mkspecs/features/mac/sdk.prf \
 		../../../Qt/5.12.0/clang_64/mkspecs/features/toolchain.prf \
@@ -675,6 +683,7 @@ Makefile: ../game_v3/game_v1.pro ../../../Qt/5.12.0/clang_64/mkspecs/macx-clang/
 ../../../Qt/5.12.0/clang_64/mkspecs/features/qt_config.prf:
 ../../../Qt/5.12.0/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../../Qt/5.12.0/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../Qt/5.12.0/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../../Qt/5.12.0/clang_64/mkspecs/features/mac/sdk.prf:
 ../../../Qt/5.12.0/clang_64/mkspecs/features/toolchain.prf:
@@ -741,8 +750,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../game_v3/images.qrc ../game_v3/sounds.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/5.12.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../game_v3/mainwindow.h ../game_v3/door.h ../game_v3/door.h ../game_v3/doorpage.h ../game_v3/gameone.h ../game_v3/gametwo.h ../game_v3/key.h ../game_v3/gamethree.h ../game_v3/finalpage.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../game_v3/main.cpp ../game_v3/mainwindow.cpp ../game_v3/door.cpp ../game_v3/doorpage.cpp ../game_v3/gameone.cpp ../game_v3/gametwo.cpp ../game_v3/key.cpp ../game_v3/gamethree.cpp ../game_v3/finalpage.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../game_v3/mainwindow.h ../game_v3/door.h ../game_v3/door.h ../game_v3/doorpage.h ../game_v3/gameone.h ../game_v3/gametwo.h ../game_v3/key.h ../game_v3/gamethree.h ../game_v3/finalpage.h ../game_v3/spacerunner.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../game_v3/main.cpp ../game_v3/mainwindow.cpp ../game_v3/door.cpp ../game_v3/doorpage.cpp ../game_v3/gameone.cpp ../game_v3/gametwo.cpp ../game_v3/key.cpp ../game_v3/gamethree.cpp ../game_v3/finalpage.cpp ../game_v3/spacerunner.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../game_v3/mainwindow.ui $(DISTDIR)/
 
 
@@ -753,6 +762,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r game_v1.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -789,9 +799,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../Qt/5.12.0/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -mmacosx-version-min=10.12 -Wall -W -dM -E -o moc_predefs.h ../../../Qt/5.12.0/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_door.cpp moc_door.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_door.cpp moc_door.cpp moc_spacerunner.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_door.cpp moc_door.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_door.cpp moc_door.cpp moc_spacerunner.cpp
 moc_mainwindow.cpp: ../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QLabel \
@@ -815,6 +825,11 @@ moc_mainwindow.cpp: ../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/
 		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../game_v3/gametwo.h \
 		../game_v3/gamethree.h \
+		../game_v3/spacerunner.h \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../game_v3/finalpage.h \
 		../game_v3/mainwindow.h \
 		moc_predefs.h \
@@ -846,6 +861,19 @@ moc_door.cpp: ../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QWidge
 		moc_predefs.h \
 		../../../Qt/5.12.0/clang_64/bin/moc
 	/Users/gauravgulati/Qt/5.12.0/clang_64/bin/moc $(DEFINES) --include /Users/gauravgulati/Desktop/QT_Proj/build-game_v1-Desktop_Qt_5_12_0_clang_64bit-Debug/moc_predefs.h -I/Users/gauravgulati/Qt/5.12.0/clang_64/mkspecs/macx-clang -I/Users/gauravgulati/Desktop/QT_Proj/game_v3 -I/Users/gauravgulati/Qt/5.12.0/clang_64/lib/QtMultimedia.framework/Headers -I/Users/gauravgulati/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/gauravgulati/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers -I/Users/gauravgulati/Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/gauravgulati/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/gauravgulati/Qt/5.12.0/clang_64/lib ../game_v3/door.h -o moc_door.cpp
+
+moc_spacerunner.cpp: ../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../game_v3/spacerunner.h \
+		moc_predefs.h \
+		../../../Qt/5.12.0/clang_64/bin/moc
+	/Users/gauravgulati/Qt/5.12.0/clang_64/bin/moc $(DEFINES) --include /Users/gauravgulati/Desktop/QT_Proj/build-game_v1-Desktop_Qt_5_12_0_clang_64bit-Debug/moc_predefs.h -I/Users/gauravgulati/Qt/5.12.0/clang_64/mkspecs/macx-clang -I/Users/gauravgulati/Desktop/QT_Proj/game_v3 -I/Users/gauravgulati/Qt/5.12.0/clang_64/lib/QtMultimedia.framework/Headers -I/Users/gauravgulati/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/gauravgulati/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers -I/Users/gauravgulati/Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/gauravgulati/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/gauravgulati/Qt/5.12.0/clang_64/lib ../game_v3/spacerunner.h -o moc_spacerunner.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -894,6 +922,11 @@ main.o: ../game_v3/main.cpp ../game_v3/mainwindow.h \
 		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../game_v3/gametwo.h \
 		../game_v3/gamethree.h \
+		../game_v3/spacerunner.h \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../game_v3/finalpage.h \
 		../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
@@ -923,6 +956,11 @@ mainwindow.o: ../game_v3/mainwindow.cpp ../game_v3/mainwindow.h \
 		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../game_v3/gametwo.h \
 		../game_v3/gamethree.h \
+		../game_v3/spacerunner.h \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../game_v3/finalpage.h \
 		ui_mainwindow.h \
 		../game_v3/key.h \
@@ -930,8 +968,6 @@ mainwindow.o: ../game_v3/mainwindow.cpp ../game_v3/mainwindow.h \
 		../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmenubar.h \
 		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QPixmap \
 		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
-		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTimer \
-		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../../../Qt/5.12.0/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
 		../../../Qt/5.12.0/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../game_v3/mainwindow.cpp
@@ -998,7 +1034,14 @@ gamethree.o: ../game_v3/gamethree.cpp ../game_v3/gamethree.h \
 		../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
 		../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QLayout \
-		../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qlayout.h
+		../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qlayout.h \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../game_v3/spacerunner.h \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamethree.o ../game_v3/gamethree.cpp
 
 finalpage.o: ../game_v3/finalpage.cpp ../game_v3/finalpage.h \
@@ -1007,6 +1050,19 @@ finalpage.o: ../game_v3/finalpage.cpp ../game_v3/finalpage.h \
 		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QPixmap \
 		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qpixmap.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o finalpage.o ../game_v3/finalpage.cpp
+
+spacerunner.o: ../game_v3/spacerunner.cpp ../game_v3/spacerunner.h \
+		../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../../../Qt/5.12.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qdebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o spacerunner.o ../game_v3/spacerunner.cpp
 
 qrc_images.o: qrc_images.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_images.o qrc_images.cpp
@@ -1019,6 +1075,9 @@ moc_mainwindow.o: moc_mainwindow.cpp
 
 moc_door.o: moc_door.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_door.o moc_door.cpp
+
+moc_spacerunner.o: moc_spacerunner.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_spacerunner.o moc_spacerunner.cpp
 
 ####### Install
 

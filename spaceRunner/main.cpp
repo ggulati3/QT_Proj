@@ -1,13 +1,10 @@
 #include <QApplication>
-#include "jumper.h"
+#include "spacerunner.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
-    Jumper game;
-    game.setWindowTitle("Jumper");
-
+    spaceRunner game;
     game.show();
 
     return a.exec();

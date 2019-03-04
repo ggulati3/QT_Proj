@@ -1,15 +1,14 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-02-10T10:01:51
+# Project created by QtCreator 2019-03-03T20:05:58
 #
 #-------------------------------------------------
 
-QT       += core gui \
-            multimedia
+QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = game_v1
+TARGET = spaceRunner
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -28,25 +27,10 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    door.cpp \
-    doorpage.cpp \
-    gameone.cpp \
-    gametwo.cpp \
-    key.cpp \
-    gamethree.cpp \
-    finalpage.cpp \
     spacerunner.cpp
 
 HEADERS += \
         mainwindow.h \
-    door.h \
-    door.h \
-    doorpage.h \
-    gameone.h \
-    gametwo.h \
-    key.h \
-    gamethree.h \
-    finalpage.h \
     spacerunner.h
 
 FORMS += \
@@ -56,10 +40,3 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-RESOURCES += \
-    images.qrc \
-    sounds.qrc
-
-DISTFILES += \
-    ../closedDoor.png

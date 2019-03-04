@@ -6,9 +6,10 @@
  * */
 gamethree::gamethree()
 {
-    layoutt->addWidget(back_button);
-    layoutt->addWidget(win_game_button);
+    layoutt->addWidget(back_button,1,0);
+    layoutt->addWidget(win_game_button,1);
     this->setLayout(layoutt);
+
 }
 
 /* destructor of game 3; this is a placeholder class for the third game
