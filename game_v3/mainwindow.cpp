@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
       connect_buttons();
 
-      QMediaPlayer* music = new QMediaPlayer();
+      music = new QMediaPlayer();
       music->setMedia(QUrl("qrc:/music.mp3"));
       music->play();
 
@@ -38,21 +38,24 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
       QCoreApplication::setAttribute(Qt::AA_DontUseNativeMenuBar);      //menu bar fix for Macs
       QMenuBar* mbar = new QMenuBar;
       QPushButton* question = new QPushButton("?");         //pushbutton
-      mbar->setCornerWidget(question);                      //set pushbutton to right corner of menu bar
+      mbar->setCornerWidget(question, Qt::TopRightCorner); //set pushbutton to right corner of menu bar
+      volume = new QPushButton("Volume (ON/OFF)");
+      mbar->setCornerWidget(volume, Qt::TopLeftCorner);
       this->setMenuBar(mbar);                               //set menu bar for central widget
 
+       QObject::connect(volume, SIGNAL(clicked()), this, SLOT(turn_off()));
       //game instructions
 
       QLabel* instructions = new QLabel("Welcome to the Arcade! \n \n"
                 "To start off, you are given one key and access to the first door. \n"
-                "Clicking the “Enter” button underneath the door will take you inside to the first minigame. \n"
+                "Clicking the “Enter” button underneath the door will take you \ninside to the first minigame. \n"
                 "Within each door, you have 3 chances to beat the minigame. \n"
                 "If you do, you will receive another key and return to the main menu. \n"
-                "This new key opens the second door and you will face a new challenge inside. \n"
+                "This new key opens the second door and you will face a new \nchallenge inside. \n"
                 "Collect all the keys and beat the challenges to win the game! \n");
       QHBoxLayout* l1 = new QHBoxLayout;
       l1->addWidget(instructions);              //add label
-      new_win->setFixedSize(600, 200);
+      new_win->setFixedSize(700, 350);
       new_win->setLayout(l1);
       QObject::connect(question, SIGNAL(clicked()), new_win, SLOT(show()));     //connect pushbutton and new window
 
@@ -60,10 +63,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
        * Create a title label for the main window.
        */
       QLabel* title = new QLabel("Arcade 10C");         //title
+      title->setFixedSize(700, 100);
       title->setStyleSheet("color: pink");              //label color
       QFont f("Bauhaus 93", 30, QFont::Bold);           //font type and size
       title->setFont(f);
-      title->move(80, -125);                            //set location in the window
+      title->move(50, 50);                            //set location in the window
       layout()->addWidget(title);
 
       /*
@@ -192,6 +196,16 @@ void MainWindow::connect_buttons(){
     QObject::connect(firstpage->button_3,SIGNAL(clicked()), this, SLOT(wait_forpage4())); //clicking third enter button goes from first page to fourth page
     QObject::connect(fourthpage->back_button,SIGNAL(clicked()), this, SLOT(go_to_main())); //clicking back_button goes back to first page
     QObject::connect(fourthpage->win_game_button,SIGNAL(clicked()), this, SLOT(win_gamethree())); //simulating winning game two, returning to main page
+}
+
+void MainWindow::turn_off(){
+    if(flag_volume) {
+        flag_volume = false;
+        music->setVolume(0);
+    } else {
+        flag_volume = true;
+        music->setVolume(50);
+    }
 }
 
 /* destructor

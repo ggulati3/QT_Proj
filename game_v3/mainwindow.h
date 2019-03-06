@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QStackedWidget>
 #include <QStatusBar>
+#include <QMediaPlayer>
 #include "doorpage.h"
 #include "gameone.h"
 #include "gametwo.h"
@@ -33,7 +34,9 @@ public:
     QStatusBar* sbar = new QStatusBar;      //status bar
     void connect_buttons();     //connects buttons to functions
     QWidget* new_win = new QWidget; //window for instructions
-
+    bool flag_volume = true;
+    QPushButton* volume;
+    QMediaPlayer* music;
 public slots:
     void wait_forpage2();
     void wait_forpage3();
@@ -45,6 +48,7 @@ public slots:
     void go_to_page_4();
     void win_gametwo();
     void win_gamethree();
+    void turn_off();
 private:
     Ui::MainWindow *ui;
 };
