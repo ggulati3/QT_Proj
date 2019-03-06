@@ -10,7 +10,7 @@
 #include "gametwo.h"
 #include "gamethree.h"
 #include "finalpage.h"
-
+#include "spacerunner.h"
 namespace Ui {
 class MainWindow;
 }
@@ -24,6 +24,7 @@ public:
     ~MainWindow();
     doorPage* firstpage = new doorPage;               //main screen
     gameone* secondpage = new gameone;                  //game one
+    spaceRunner* firstGame = new spaceRunner(secondpage);
     gametwo* thirdpage = new gametwo;                   //game two
     gamethree* fourthpage = new gamethree;              //game three
     finalpage* fifthpage = new finalpage;               //final page of the game

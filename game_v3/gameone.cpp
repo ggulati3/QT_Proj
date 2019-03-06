@@ -1,28 +1,18 @@
 #include "gameone.h"
-#include "spacerunner.h"
-#include <QLabel>
-#include <QLayout>
-#include <QPushButton>
-
+#include <QDebug>
 /* constructor of game 1; this is a placeholder class for the first game
  * @param N/A
  * @return N/A
  * */
 gameone::gameone()
 {
-    layoutt->addWidget(back_button,0,0);
-    layoutt->addWidget(win_game_button,0,2);
-    this->setLayout(layoutt);
+    setFocusPolicy(Qt::StrongFocus);
 
-    QWidget* game = new spaceRunner;
-    QGridLayout* l1 = new QGridLayout;
-    game->setStyleSheet("background-color:black;");
-    layoutt->addWidget(game,1,1);
-    game->setFixedSize(600,600);
-    game->setLayout(l1);
+     layoutt->addWidget(game,4,4);
+     layoutt->addWidget(back_button,10,0);
+     layoutt->addWidget(win_game_button,10,10);
 
-
-
+     this->setLayout(layoutt);
 }
 
 /* destructor of game 1; this is a placeholder class for the first game
@@ -30,4 +20,32 @@ gameone::gameone()
  * @return N/A
  * */
 gameone::~gameone(){
+}
+
+/*
+ move the hero based of the arrow keys
+ @param: QKeyEvent * e -- the pointer that shows what the user pressed
+ @return: N/A
+ */
+void gameone::keyPressEvent(QKeyEvent *e){
+    int key = e->key();
+
+    if(key == Qt::Key_Right) {
+        game->move_hero_right();
+
+    }
+    if(key == Qt::Key_Left) {
+        game->move_hero_left();
+
+    }
+    if(key == Qt::Key_Down) {
+        game->move_hero_down();
+
+    }
+    if(key == Qt::Key_Up) {
+        game->move_hero_up();
+
+    }
+
+    QWidget::update();
 }
