@@ -28,7 +28,7 @@ spaceRunner::spaceRunner(QWidget * parent)
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(moveBlock()));
     timer->start(500); //time specified in ms
     QWidget::update();
-    if(hasWon) {
+    if(hasWon || gameOver) {
         timer->stop();
     }
 
@@ -63,9 +63,18 @@ void spaceRunner::paintEvent(QPaintEvent *e) {
     // Check if hero has got to finish line -- then show user that he/she has won
     if(hasWon) {
        QFont font("Courier", 60, QFont::DemiBold);
+       qp.setPen("white");
        qp.setFont(font);
        qp.drawText(QPoint(50,450), "YOU WON");
     }
+
+    if(gameOver) {
+        QFont font("Courier", 60, QFont::DemiBold);
+        qp.setPen("white");
+        qp.setFont(font);
+        qp.drawText(QPoint(50,450), "YOU LOST");
+    }
+
 
 
 }
@@ -77,8 +86,10 @@ void spaceRunner::paintEvent(QPaintEvent *e) {
  */
 
 void spaceRunner::move_hero_right() {
-    if(hero_x < 300 && !hasWon)
+    if(hero_x < 300 && !hasWon && !gameOver) {
         hero_x+=10;
+        hasBeenHit();
+    }
     qDebug() << "(" << hero_x << ", " << hero_y << ")";
 }
 
@@ -89,8 +100,10 @@ void spaceRunner::move_hero_right() {
  */
 
 void spaceRunner::move_hero_left() {
-    if(hero_x > 30 && !hasWon)
+    if(hero_x > 30 && !hasWon && !gameOver) {
         hero_x-=10;
+        hasBeenHit();
+    }
      qDebug() << "(" << hero_x << ", " << hero_y << ")";
 }
 
@@ -101,8 +114,10 @@ void spaceRunner::move_hero_left() {
  */
 
 void spaceRunner::move_hero_up() {
-    if(hero_y > 100 && !hasWon)
+    if(hero_y > 100 && !hasWon && !gameOver) {
         hero_y-=10;
+        hasBeenHit();
+    }
     if(hero_y == 120) {
         hasWon = true;
     }
@@ -117,8 +132,10 @@ void spaceRunner::move_hero_up() {
  */
 
 void spaceRunner::move_hero_down() {
-    if(hero_y < 620 && !hasWon)
+    if(hero_y < 620 && !hasWon && !gameOver) {
         hero_y+=10;
+        hasBeenHit();
+    }
     qDebug() << "(" << hero_x << ", " << hero_y << ")";
 }
 
@@ -142,8 +159,23 @@ void spaceRunner::moveBlock() {
             }
         }
      }
-    if(!hasWon)
+    hasBeenHit();
+    if(!hasWon && !gameOver)
      QWidget::update();
+
+}
+
+void spaceRunner::hasBeenHit() {
+    for(int i = 0 ; i < yellowDots.size(); i++) {
+        if(hero_x <= yellowDots[i]->getX()+25 && hero_x >= yellowDots[i]->getX() -25 && hero_y <= yellowDots[i]->getY()+25 && hero_y >= yellowDots[i]->getY() -25){ // +-15
+            qDebug() << "INTERSECTION";
+            gameOver = true;
+        }
+    }
+
+}
+
+void spaceRunner::endGame(){
 
 }
 

@@ -35,7 +35,11 @@ SOURCES += \
     key.cpp \
     gamethree.cpp \
     finalpage.cpp \
-    spacerunner.cpp
+    spacerunner.cpp \
+    shooting_game.cpp \
+    lose.cpp \
+    game_over.cpp \
+    live.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -47,7 +51,11 @@ HEADERS += \
     key.h \
     gamethree.h \
     finalpage.h \
-    spacerunner.h
+    spacerunner.h \
+    shooting_game.h \
+    lose.h \
+    game_over.h \
+    live.h
 
 FORMS += \
         mainwindow.ui
@@ -62,4 +70,6 @@ RESOURCES += \
     sounds.qrc
 
 DISTFILES += \
-    ../closedDoor.png
+    ../closedDoor.png \
+    game_over.png \
+    game_over.png

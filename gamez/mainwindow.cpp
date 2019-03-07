@@ -17,11 +17,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
       ui->setupUi(this);
 
-      stackWidget->addWidget(firstpage); // doors - index 0
-      stackWidget->addWidget(secondpage); //game one - index 1
-      stackWidget->addWidget(thirdpage); //game two - index 2
-      stackWidget->addWidget(fourthpage); //game three - index 3
-      stackWidget->addWidget(fifthpage); //final page - index 4
+      stackWidget->addWidget(doors); // doors - index 0
+      stackWidget->addWidget(game_one); //game one - index 1
+      stackWidget->addWidget(game_two); //game two - index 2
+      stackWidget->addWidget(game_three); //game three - index 3
+      stackWidget->addWidget(final_page); //final page - index 4
+      stackWidget->addWidget(you_lose); //lose page index 5
+      stackWidget->addWidget(gameover); // index 6
       stackWidget->setCurrentIndex(0);
       this->setCentralWidget(stackWidget);      //central widget is stacked, so multiple screens can be shown
 
@@ -31,31 +33,33 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
       music->setMedia(QUrl("qrc:/music.mp3"));
       music->play();
 
-    /*
-     * Create a menu bar on the tope of the screen, with a pushbutton "?".
-     * Clicking the button opens a new window with the game instructions.
-     */
-      QCoreApplication::setAttribute(Qt::AA_DontUseNativeMenuBar);      //menu bar fix for Macs
-      QMenuBar* mbar = new QMenuBar;
-      QPushButton* question = new QPushButton("?");         //pushbutton
-      mbar->setCornerWidget(question, Qt::TopRightCorner); //set pushbutton to right corner of menu bar
-      volume = new QPushButton("Volume (ON/OFF)");
-      mbar->setCornerWidget(volume, Qt::TopLeftCorner);
-      this->setMenuBar(mbar);                               //set menu bar for central widget
 
-       QObject::connect(volume, SIGNAL(clicked()), this, SLOT(turn_off()));
+      /*
+           * Create a menu bar on the tope of the screen, with a pushbutton "?".
+           * Clicking the button opens a new window with the game instructions.
+           */
+            QCoreApplication::setAttribute(Qt::AA_DontUseNativeMenuBar);      //menu bar fix for Macs
+            QMenuBar* mbar = new QMenuBar;
+            QPushButton* question = new QPushButton("?");         //pushbutton
+            mbar->setCornerWidget(question, Qt::TopRightCorner); //set pushbutton to right corner of menu bar
+            mbar->setCornerWidget(volume, Qt::TopLeftCorner);
+            this->setMenuBar(mbar);                               //set menu bar for central widget
+
+
+            //game instructions
+
       //game instructions
 
       QLabel* instructions = new QLabel("Welcome to the Arcade! \n \n"
                 "To start off, you are given one key and access to the first door. \n"
-                "Clicking the “Enter” button underneath the door will take you \ninside to the first minigame. \n"
+                "Clicking the “Enter” button underneath the door will take you inside to the first minigame. \n"
                 "Within each door, you have 3 chances to beat the minigame. \n"
                 "If you do, you will receive another key and return to the main menu. \n"
-                "This new key opens the second door and you will face a new \nchallenge inside. \n"
+                "This new key opens the second door and you will face a new challenge inside. \n"
                 "Collect all the keys and beat the challenges to win the game! \n");
       QHBoxLayout* l1 = new QHBoxLayout;
       l1->addWidget(instructions);              //add label
-      new_win->setFixedSize(700, 350);
+      new_win->setFixedSize(600, 200);
       new_win->setLayout(l1);
       QObject::connect(question, SIGNAL(clicked()), new_win, SLOT(show()));     //connect pushbutton and new window
 
@@ -63,8 +67,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
        * Create a title label for the main window.
        */
       QLabel* title = new QLabel("Arcade 10C");         //title
-      title->setFixedSize(700, 100);
       title->setStyleSheet("color: pink");              //label color
+      title->setFixedSize(700, 100);
       QFont f("Bauhaus 93", 30, QFont::Bold);           //font type and size
       title->setFont(f);
       title->move(50, 50);                            //set location in the window
@@ -78,6 +82,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
       sbar->addWidget(key_label);
       key* new_key = new key;                           //create and add one key
       sbar->addWidget(new_key);
+      QLabel* lives_label = new QLabel("Lives: ");         //label "lives"
+      lives_label->setStyleSheet("color: black");
+      sbar->addWidget(lives_label);
+      sbar->addWidget(num_lives);
       setStatusBar(sbar);                               //set status bar for central widget
       sbar->setStyleSheet("color: white");              //text color black
 
@@ -134,7 +142,7 @@ void MainWindow::win_gameone(){
     key* new_key = new key;
     sbar->addWidget(new_key);
     setStatusBar(sbar);
-    firstpage->layout->addWidget(firstpage->button_2, 1, 1, 5, 1);
+    doors->layout->addWidget(doors->button_2, 1, 1, 5, 1);
     stackWidget->setCurrentIndex(0);
 }
 
@@ -170,7 +178,7 @@ void MainWindow::win_gametwo(){
     key* new_key = new key;
     sbar->addWidget(new_key);
     setStatusBar(sbar);
-    firstpage->layout->addWidget(firstpage->button_3, 1, 2, 5, 1);
+    doors->layout->addWidget(doors->button_3, 1, 2, 5, 1);
     stackWidget->setCurrentIndex(0);
 }
 
@@ -182,30 +190,43 @@ void MainWindow::win_gamethree(){
     stackWidget->setCurrentIndex(4);
 }
 
+void MainWindow::go_to_losepage(){
+    game_three->lose_life();
+    if(game_three->live==2){
+        num_lives->layoutt->removeWidget(&(num_lives->live_1));
+    }
+    if(game_three->live==1){
+        num_lives->layoutt->removeWidget(&(num_lives->live_2));
+    }
+    if(game_three->live==0){
+        num_lives->layoutt->removeWidget(&(num_lives->live_3));
+    }
+    setStatusBar(sbar);
+    if(game_three->live > 0)
+        stackWidget->setCurrentIndex(5);
+    else {
+        stackWidget->setCurrentIndex(6);
+    }
+}
+
 /* Function to connect all the buttons to transition between windows
  * @param N/A
  * @return N/A
  * */
 void MainWindow::connect_buttons(){
-    QObject::connect(firstpage->button,SIGNAL(clicked()), this, SLOT(wait_forpage2())); //clicking enter button goes from first page to second page
-    QObject::connect(secondpage->back_button,SIGNAL(clicked()), this, SLOT(go_to_main())); //clicking back_button goes back to first page
-    QObject::connect(secondpage->win_game_button,SIGNAL(clicked()), this, SLOT(win_gameone())); //simulating winning game one, returning to main page
-    QObject::connect(firstpage->button_2,SIGNAL(clicked()), this, SLOT(wait_forpage3())); //clicking second enter button goes from first page to third page
-    QObject::connect(thirdpage->back_button,SIGNAL(clicked()), this, SLOT(go_to_main())); //clicking back_button goes back to first page
-    QObject::connect(thirdpage->win_game_button,SIGNAL(clicked()), this, SLOT(win_gametwo())); //simulating winning game two, returning to main page
-    QObject::connect(firstpage->button_3,SIGNAL(clicked()), this, SLOT(wait_forpage4())); //clicking third enter button goes from first page to fourth page
-    QObject::connect(fourthpage->back_button,SIGNAL(clicked()), this, SLOT(go_to_main())); //clicking back_button goes back to first page
-    QObject::connect(fourthpage->win_game_button,SIGNAL(clicked()), this, SLOT(win_gamethree())); //simulating winning game two, returning to main page
-}
-
-void MainWindow::turn_off(){
-    if(flag_volume) {
-        flag_volume = false;
-        music->setVolume(0);
-    } else {
-        flag_volume = true;
-        music->setVolume(50);
-    }
+    QObject::connect(doors->button,SIGNAL(clicked()), this, SLOT(wait_forpage2())); //clicking enter button goes from first page to second page
+    QObject::connect(game_one->back_button,SIGNAL(clicked()), this, SLOT(go_to_main())); //clicking back_button goes back to first page
+    QObject::connect(game_one->win_game_button,SIGNAL(clicked()), this, SLOT(win_gameone())); //simulating winning game one, returning to main page
+    QObject::connect(doors->button_2,SIGNAL(clicked()), this, SLOT(wait_forpage3())); //clicking second enter button goes from first page to third page
+    QObject::connect(game_two->back_button,SIGNAL(clicked()), this, SLOT(go_to_main())); //clicking back_button goes back to first page
+    QObject::connect(game_two->win_game_button,SIGNAL(clicked()), this, SLOT(win_gametwo())); //simulating winning game two, returning to main page
+    QObject::connect(doors->button_3,SIGNAL(clicked()), this, SLOT(wait_forpage4())); //clicking third enter button goes from first page to fourth page
+    QObject::connect(game_three->back_button,SIGNAL(clicked()), this, SLOT(go_to_main())); //clicking back_button goes back to first page
+    QObject::connect(game_three->game,SIGNAL(won_game()), this, SLOT(win_gamethree())); // winning game three, returning to main page
+    QObject::connect(game_three->game, SIGNAL(lose_game()), this, SLOT(go_to_losepage())); // losing game three, returning to main page
+    QObject::connect(you_lose->back_button, SIGNAL(clicked()), this, SLOT(go_to_main()));
+    QObject::connect(you_lose->try_again, SIGNAL(clicked()), this, SLOT(go_to_page_4()));
+    QObject::connect(volume, SIGNAL(clicked()), this, SLOT(turn_off()));
 }
 
 /* destructor
@@ -216,4 +237,14 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete new_win;
+}
+
+void MainWindow::turn_off(){
+    if(flag_volume) {
+        flag_volume = false;
+        music->setVolume(0);
+    } else {
+        flag_volume = true;
+        music->setVolume(50);
+    }
 }

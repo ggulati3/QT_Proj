@@ -46,8 +46,8 @@ private:
    int border_x;
    int border_y;
 
-   bool hasBeenHit();
-   bool gameOver;
+   void hasBeenHit();
+   bool gameOver = false;
    void endGame();
    bool hasWon = false;
 
