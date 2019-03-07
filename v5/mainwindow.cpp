@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
       stackWidget->addWidget(gameover); // index 6
       stackWidget->addWidget(lose_2); // index 7
       stackWidget->addWidget(lose_3); // index 8
+      stackWidget->addWidget(won);  //index 9
       stackWidget->setCurrentIndex(0);
       this->setCentralWidget(stackWidget);      //central widget is stacked, so multiple screens can be shown
 
@@ -197,7 +198,7 @@ void MainWindow::win_gametwo(){
     num_keys->layout->addWidget((num_keys->key_3));
     setStatusBar(sbar);
     (doors->d_3->door_lay)->addWidget(doors->button_3);
-    stackWidget->setCurrentIndex(0);
+    stackWidget->setCurrentIndex(9);
 }
 
 /* Function to change window back from game three to final page
@@ -307,8 +308,10 @@ void MainWindow::connect_buttons(){
     QObject::connect(game_one->game, SIGNAL(endGame()), this, SLOT(lose_gameone()));
 
     QObject::connect(game_two->Tic_Tac_Toe->board, SIGNAL(lose()), this, SLOT(lose_gametwo()));
+    QObject::connect(game_two->Tic_Tac_Toe->board, SIGNAL(win()), this, SLOT(win_gametwo()));
     QObject::connect(lose_3->back_button, SIGNAL(clicked()), this, SLOT(go_to_main()));
     QObject::connect(lose_3->try_again, SIGNAL(clicked()), this, SLOT(go_to_gametwo()));
+    QObject::connect(won->win_game_button, SIGNAL(clicked()), this, SLOT(go_to_main()));
     QObject::connect(volume, SIGNAL(clicked()), this, SLOT(turn_off()));
 }
 

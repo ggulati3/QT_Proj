@@ -39,7 +39,8 @@ SOURCES += \
     shooting_game.cpp \
     lose.cpp \
     game_over.cpp \
-    live.cpp
+    live.cpp \
+    win_page_1.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -55,7 +56,8 @@ HEADERS += \
     shooting_game.h \
     lose.h \
     game_over.h \
-    live.h
+    live.h \
+    win_page_1.h
 
 FORMS += \
         mainwindow.ui
@@ -66,22 +68,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    sounds.qrc
+    sounds.qrc \
+    images.qrc
 
 DISTFILES += \
     ../closedDoor.png \
-    game_over.png \
-    game_over.png \
-    ticboard.png \
     loading.gif \
     loading.gif \
-    loading.gif \
-    ticboard.png \
-    lives.png \
-    pixel.png \
-    background.png \
-    you_lost.png \
-    game_over.png \
-    bullet.png \
-    enemy.png \
-    ship.png
+    loading.gif

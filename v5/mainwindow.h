@@ -16,6 +16,7 @@
 #include "key.h"
 #include "live.h"
 #include <QMediaPlayer>
+#include "win_page_1.h"
 namespace Ui {
 class MainWindow;
 }
@@ -37,6 +38,7 @@ public:
     gameonelose* lose_2 = new gameonelose;
     gametwolose* lose_3 = new gametwolose;
     game_over* gameover = new game_over;
+    win_page_1* won = new win_page_1;
     QStackedWidget* stackWidget = new QStackedWidget;   //stacked widget for main screen and games
     //int num_keys = 1;       //key counter for whole program
     keys* num_keys = new keys;

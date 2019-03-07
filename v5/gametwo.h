@@ -63,6 +63,7 @@ public slots:
     void check_game();
 signals:
     void lose();
+    void win();
 private:
     QVector<box*> my_vec;
     int turns_counter;

@@ -129,8 +129,12 @@ void vec::check_game()
 {
     if (player_win() == true || computer_win() == true || get_counter() == 9)
     {
-        emit lose();
         finished = true;
+        if (player_win()==true)
+            emit win();
+        else {
+            emit lose();
+        }
     }
 }
 
