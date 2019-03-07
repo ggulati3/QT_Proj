@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/door"/>
+    <qresource prefix="/">
+        <file>openDoor.png</file>
+        <file>key.png</file>
+        <file>pixel.png</file>
+        <file>enemy.png</file>
+        <file>ship.png</file>
+        <file>you_lost.png</file>
+        <file>loading.gif</file>
+        <file>l.gif</file>
+    </qresource>
+    <qresource prefix="/sounds"/>
+</RCC>
