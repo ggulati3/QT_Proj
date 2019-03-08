@@ -17,6 +17,7 @@
 #include "live.h"
 #include <QMediaPlayer>
 #include "win_page_1.h"
+#include "instructions.h"
 namespace Ui {
 class MainWindow;
 }
@@ -39,6 +40,9 @@ public:
     gametwolose* lose_3 = new gametwolose;
     game_over* gameover = new game_over;
     win_page_1* won = new win_page_1;
+    instruction_game1* instruc_1 = new instruction_game1;
+    instruction_game2* instruc_2 = new instruction_game2;
+    instruction_game3* instruc_3 = new instruction_game3;
     QStackedWidget* stackWidget = new QStackedWidget;   //stacked widget for main screen and games
     //int num_keys = 1;       //key counter for whole program
     keys* num_keys = new keys;
@@ -79,6 +83,9 @@ public slots:
     void lose_gametwo();
 
     void wait_for_lose2();
+
+    void load_gif();
+    void load_button();
 private:
     Ui::MainWindow *ui;
 };

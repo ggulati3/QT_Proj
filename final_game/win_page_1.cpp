@@ -1,6 +1,6 @@
 #include "win_page_1.h"
 #include <QLabel>
-#include <QVBoxLayout>
+#include <QGridLayout>
 #include <QPixmap>
 #include <QMovie>
 
@@ -10,25 +10,26 @@
  * */
 win_page_1::win_page_1()
 {
-    setStyleSheet("background-color:white;");
+    //setStyleSheet("background-color:black;");
     QLabel* you_won = new QLabel("You did it! You earned another key");
 
 
-    you_won->setStyleSheet("color: black");              //label color
+    you_won->setStyleSheet("color: white");              //label color
     //you_won->setFixedSize(700, 100);
-    QFont f("Cooper", 30, QFont::Bold);           //font type and size
+    QFont f("Courier", 30, QFont::DemiBold);           //font type and size
     you_won->setFont(f);
-    QVBoxLayout* layout = new QVBoxLayout;
-
+    QGridLayout* layout = new QGridLayout;
+    you_won->setFont(f);
     QLabel *lbl = new QLabel;
     QMovie *mv = new QMovie(":/key2.gif");
     mv->start();
     lbl->setAttribute(Qt::WA_NoSystemBackground);
     lbl->setMovie(mv);
-    layout->addWidget(lbl);
-
-    layout->addWidget(you_won);
+    layout->addWidget(lbl, 1,2);
+    win_game_button->setFont(f);
+    layout->addWidget(you_won, 1, 3);
     you_won->move(200, 50);
-    layout->addWidget(win_game_button);
+    layout->addWidget(win_game_button, 2, 3);
+
     setLayout(layout);
 }

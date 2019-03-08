@@ -27,9 +27,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
       stackWidget->addWidget(lose_2); // index 7
       stackWidget->addWidget(lose_3); // index 8
       stackWidget->addWidget(won);  //index 9
-      stackWidget->setCurrentIndex(9);
+      stackWidget->addWidget(instruc_1);//index 10
+      stackWidget->addWidget(instruc_2); //index 11
+      stackWidget->addWidget(instruc_3); //index 12
+      stackWidget->setCurrentIndex(12);
       this->setCentralWidget(stackWidget);      //central widget is stacked, so multiple screens can be shown
-
+      layout()->setAlignment(you_lose, Qt::AlignCenter);
       connect_buttons();
 
       music = new QMediaPlayer();
@@ -291,6 +294,15 @@ void MainWindow::go_to_losepage(){
     }
 }
 
+void MainWindow::load_gif(){
+    you_lose->stack->setCurrentIndex(1);
+    QTimer::singleShot(6000, this, SLOT(load_button()));
+}
+
+void MainWindow::load_button(){
+    you_lose->stack->setCurrentIndex(0);
+}
+
 /* Function to connect all the buttons to transition between windows
  * @param N/A
  * @return N/A
@@ -330,6 +342,7 @@ void MainWindow::connect_buttons(){
     QObject::connect(lose_3->try_again, SIGNAL(clicked()), this, SLOT(go_to_gametwo()));
     QObject::connect(won->win_game_button, SIGNAL(clicked()), this, SLOT(go_to_main()));
     QObject::connect(volume, SIGNAL(clicked()), this, SLOT(turn_off()));
+    QObject::connect(you_lose->try_again, SIGNAL(clicked()), this, SLOT(load_gif()));
 }
 
 /* destructor

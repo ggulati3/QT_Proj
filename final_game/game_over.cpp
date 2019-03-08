@@ -1,9 +1,16 @@
 #include "game_over.h"
+#include <QMovie>
 
+#include<QHBoxLayout>
 game_over::game_over()
 {
-    setStyleSheet("background-color:white;");
-    QPixmap pic(":/game_over.png");
-    pic = pic.scaled(400,200);
-    this->setPixmap(pic);
+    QLabel* lbl = new QLabel;
+    QMovie* mv = new QMovie(":/game_over.gif");
+    mv->start();
+    lbl->setAttribute(Qt::WA_NoSystemBackground);
+    lbl->setMovie(mv);
+
+    QHBoxLayout* layout = new QHBoxLayout;
+    layout->addWidget(lbl);
+    setLayout(layout);
 }

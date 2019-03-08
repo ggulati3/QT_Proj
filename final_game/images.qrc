@@ -15,6 +15,9 @@
         <file>closedDoor.png</file>
         <file>key.gif</file>
         <file>key2.gif</file>
+        <file>loading.gif</file>
+        <file>you_lose.png</file>
+        <file>game_over.gif</file>
     </qresource>
     <qresource prefix="/sounds"/>
 </RCC>

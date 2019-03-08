@@ -40,7 +40,8 @@ SOURCES += \
     lose.cpp \
     game_over.cpp \
     live.cpp \
-    win_page_1.cpp
+    win_page_1.cpp \
+    instructions.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -57,7 +58,8 @@ HEADERS += \
     lose.h \
     game_over.h \
     live.h \
-    win_page_1.h
+    win_page_1.h \
+    instructions.h
 
 FORMS += \
         mainwindow.ui
